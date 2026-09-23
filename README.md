@@ -1,3 +1,7 @@
+[![GDS](https://github.com/qd39l/echoscope/actions/workflows/gds.yaml/badge.svg)](https://github.com/qd39l/echoscope/actions/workflows/gds.yaml)
+[![Docs](https://github.com/qd39l/echoscope/actions/workflows/docs.yaml/badge.svg)](https://github.com/qd39l/echoscope/actions/workflows/docs.yaml)
+[![Tests](https://github.com/qd39l/echoscope/actions/workflows/test.yaml/badge.svg)](https://github.com/qd39l/echoscope/actions/workflows/test.yaml)
+
 # EchoScope
 
 **A butterfly-effect time machine on a tiny chip.**
