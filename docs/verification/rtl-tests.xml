@@ -1,0 +1,11 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1790184501" />
+    <testcase name="diagnostic_reference_and_roundtrip" classname="test" file="build/serial-video/test/test.py" lineno="67" time="4.217031955718994" sim_time_ns="4835500.0" ratio_time="1146659.5583754731" />
+    <testcase name="reset_enable_priority_and_all_cells" classname="test" file="build/serial-video/test/test.py" lineno="106" time="0.1793529987335205" sim_time_ns="210540.0" ratio_time="1173886.1434528707" />
+    <testcase name="raster_reconstruction_and_frame_controls" classname="test" file="build/serial-video/test/test.py" lineno="162" time="32.008544921875" sim_time_ns="33601500.0" ratio_time="1049766.5570869595" />
+    <testcase name="busy_freeze_reset_and_latched_command" classname="test" file="build/serial-video/test/test.py" lineno="207" time="0.01071786880493164" sim_time_ns="13420.0" ratio_time="1252114.598923344" />
+    <testcase name="frame_commands_audio_and_scan_restoration" classname="test_frames" file="build/serial-video/test/test_frames.py" lineno="23" time="131.77771401405334" sim_time_ns="206262500.0" ratio_time="1565230.5212852855" />
+    <testcase name="serial_initialization_masks_and_restarts" classname="test_init" file="build/serial-video/test/test_init.py" lineno="7" time="0.011726856231689453" sim_time_ns="13700.0" ratio_time="1168258.5451144634" />
+  </testsuite>
+</testsuites>

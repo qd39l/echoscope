@@ -1,0 +1,17 @@
+{
+  "proofs_passed": [
+    "abstract_inverse_both_directions",
+    "serial_evolve",
+    "serial_perturb",
+    "serial_clone",
+    "serial_identity_scan",
+    "serial_initialization_from_arbitrary_storage"
+  ],
+  "source_sha256": {
+    "src/echo_engine.v": "0df98fd8247786fbbfc9773cd44ff074d7440ba5512a566688a7ef312a7e894f",
+    "src/echo_step.v": "8218244ad657233693c3ea93d7b59b8debeed1049341f019554a68cd46322891",
+    "test/formal.v": "1550c16e0280ad9d2edbede979036bfc8c567c28f2ce550e07757ca31ac2cbd9",
+    "test/formal_init.v": "0b7360ffd30744be65341c1703ce26991d537877b23ae8c515b419abaa8fc222",
+    "test/formal_serial.v": "4e1b3634d366b9918e9c23029fb8514ee01225ab05ee5a185e869210c1204f46"
+  }
+}

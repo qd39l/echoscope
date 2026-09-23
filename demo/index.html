@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EchoScope · a butterfly-effect time machine</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header><a class="brand" href="#">ECHO<span>SCOPE</span><i></i></a><div class="tag">TTSKY26d · 1 × 1 tile · 25 MHz</div></header>
+<section class="intro"><div class="eyebrow">TWO WORLDS. ONE BIT APART.</div><h1>Chaos has a<br><em>reverse gear.</em></h1><p>Flip one cell. Watch two universes diverge.<br>Then run time backwards, exactly.</p></section>
+<section class="instrument" aria-label="EchoScope simulator">
+<div class="screen-head"><span><i class="live-dot"></i> LIVE MODEL</span><span id="direction">PAUSED</span><span>32 CELLS × 60 GENERATIONS</span></div>
+<canvas id="screen" width="640" height="480" aria-label="Sixty generations of two reversible cellular automata; cyan is A only, magenta B only, white both.">Your browser does not support canvas.</canvas>
+<div class="legend"><span><i class="cyan"></i>A only</span><span><i class="magenta"></i>B only</span><span><i class="white"></i>Both</span><span><i class="amber"></i>Difference view</span></div>
+<div class="readouts"><div><span>GENERATION</span><strong id="epoch">+00000</strong></div><div><span>DISAGREEMENT</span><strong id="distance">01 <small>/ 32</small></strong></div><div><span>WORLD MEMORY</span><strong>128 <small>bits</small></strong></div></div>
+<div class="transport"><button id="back" aria-label="Step backward one generation">← Step</button><button id="reverse">◀ Rewind</button><button id="pause" class="selected">Pause</button><button id="forward">Play ▶</button><button id="next" aria-label="Step forward one generation">Step →</button></div>
+<div class="intervene"><label for="cell">PERTURB CELL <output id="cell-value">16</output><input type="range" id="cell" min="0" max="31" value="16"></label><button id="kick" class="accent">Flip one bit</button><button id="clone">Clone A → B</button></div>
+<div class="options"><label><input type="checkbox" id="diff"> Differences only</label><label><input type="checkbox" id="sound"> Sound</label><button id="reset">Restart experiment ↺</button></div>
+<div id="announcement" class="sr-only" aria-live="polite"></div>
+</section>
+<section class="notes"><div><span class="number">01 / TRY IT</span><h2>Break the symmetry.</h2><p>Clone A into B, then flip one bit. The coloured wedge is the footprint of that tiny intervention. Play advances the top row; the rows below look into its future.</p></div><div><span class="number">02 / THE TRICK</span><h2>No history to remember.</h2><p>The chip keeps just the present and past of each world. Its rule reconstructs the next—or previous—state exactly. The VGA scan borrows those states, draws 60 rows, then rewinds itself.</p></div><div><span class="number">03 / THE CATCH</span><h2>A new past, too.</h2><p>Changing a bit changes the entire trajectory. Rewind reverses evolution, not your interventions. To undo a flip, flip the same cell again at the same generation.</p></div></section>
+<footer>Interactive reference model · RTL and physical verification live in the repository.<br>Reversible simulation in ordinary CMOS. No CPU. No framebuffer. No claim of zero-energy computing.</footer>
+</main><script src="model.js"></script><script src="app.js"></script>
+</body></html>

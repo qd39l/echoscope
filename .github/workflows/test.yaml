@@ -1,0 +1,28 @@
+name: test
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: sudo apt-get update && sudo apt-get install -y iverilog verilator
+      - run: pip install -r test/requirements.txt
+      - run: python tools/check_privacy.py --history
+      - run: make lint
+      - run: python tools/verify_model.py
+      - run: make -C test
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: simulation-results
+          path: |
+            test/results.xml
+            test/output/*

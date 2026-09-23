@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1790188065" />
+    <testcase name="diagnostic_reference_and_roundtrip" classname="test" file="test/test.py" lineno="67" time="10.045937061309814" sim_time_ns="4835500.0" ratio_time="481338.8706786836" />
+    <testcase name="reset_enable_priority_and_all_cells" classname="test" file="test/test.py" lineno="106" time="0.3173689842224121" sim_time_ns="210540.0" ratio_time="663391.8576380281" />
+    <testcase name="raster_reconstruction_and_frame_controls" classname="test" file="test/test.py" lineno="162" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="busy_freeze_reset_and_latched_command" classname="test" file="test/test.py" lineno="207" time="0.01984691619873047" sim_time_ns="13420.0" ratio_time="676175.576377877" />
+    <testcase name="video_pins_after_synthesis" classname="test_gate_video" file="test/test_gate_video.py" lineno="9" time="20.563166856765747" sim_time_ns="17079980.0" ratio_time="830610.3879315797" />
+    <testcase name="serial_initialization_masks_and_restarts" classname="test_init" file="test/test_init.py" lineno="7" time="0.020359039306640625" sim_time_ns="13700.0" ratio_time="672919.7676597339" />
+  </testsuite>
+</testsuites>

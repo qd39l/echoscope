@@ -1,0 +1,20 @@
+{
+  "mask_layers_compared": 34,
+  "unique_labels_compared": 19819,
+  "mask_xor_empty": true,
+  "labels_identical": true,
+  "package_sha256": {
+    "commit_id.json": "cbfbc59d0d311dbf041ce24a9f09efe33797cdfac91e051675b9ec0665228021",
+    "pdk.json": "c6a641594d1ca1482cd3d37c9ea0f53d133171d60d052e57a96c9da47912c8a7",
+    "resolved.json": "e920d4efff45bf24c76539d238f4f7ed8db9667556606aceb45d0abff9320cca",
+    "stats/metrics.csv": "cdb0d66be4339a048a415a6bde9496522ae314875841a045a139fc71e819b635",
+    "stats/synthesis-stats.txt": "850c30eb69acfbd330d5f615a84059bcc5a5fdc3ceeb0c2156ccdac6f994815f",
+    "tt_um_qd39l_echoscope.gds": "f33345157c28b083020ec2bd0856105321f6c6c89c9d10918e153c6c6903b15d",
+    "tt_um_qd39l_echoscope.lef": "ac6da82da145c508662ef7fffd5af07f9a5c281f4931e26835b13cc841c0bbde",
+    "tt_um_qd39l_echoscope.max.spef": "deaae979602f8aa17537dd12f75a99a99be44120bb882d2ff68f112568f7c542",
+    "tt_um_qd39l_echoscope.min.spef": "705cd1d9e5597a6c379d99ffb118e0bea5a3966661e465dd7811f6230d741e0e",
+    "tt_um_qd39l_echoscope.nom.spef": "5136d6471de15e15febf6cae3e0abe1b0a8d68eb4b0ef8d7bed1baa2ea546b57",
+    "tt_um_qd39l_echoscope.oas": "35d5630911cb5a943b8141d28c53f451bdfedabc43cb0656ab3b4252fa902d34",
+    "tt_um_qd39l_echoscope.v": "904ddac7a12b5febf0842da152625f23394f4dd4d582c225f034f4f77e96528a"
+  }
+}

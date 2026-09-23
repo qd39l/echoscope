@@ -1,0 +1,53 @@
+{
+  "PL_TARGET_DENSITY_PCT": 68,
+  "CLOCK_PERIOD": 40,
+  "PL_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+  "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+  "RUN_LINTER": 1,
+  "LINTER_INCLUDE_PDK_MODELS": 1,
+  "CLOCK_PORT": "clk",
+  "RUN_KLAYOUT_XOR": 0,
+  "RUN_KLAYOUT_DRC": 0,
+  "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": 0,
+  "TOP_MARGIN_MULT": 1,
+  "BOTTOM_MARGIN_MULT": 1,
+  "LEFT_MARGIN_MULT": 6,
+  "RIGHT_MARGIN_MULT": 6,
+  "FP_SIZING": "absolute",
+  "GRT_ALLOW_CONGESTION": 1,
+  "FP_IO_HLENGTH": 2,
+  "FP_IO_VLENGTH": 2,
+  "FP_PDN_VPITCH": 38.87,
+  "RUN_CTS": 1,
+  "FP_PDN_MULTILAYER": 0,
+  "MAGIC_DEF_LABELS": 0,
+  "MAGIC_WRITE_LEF_PINONLY": 1,
+  "SYNTH_STRATEGY": "AREA 2",
+  "EXTRA_EXCLUDED_CELLS": [
+    "sky130_fd_sc_hd__clkdlybuf*",
+    "sky130_fd_sc_hd__a21oi_1",
+    "sky130_fd_sc_hd__nor2_1",
+    "sky130_fd_sc_hd__dlygate*_1",
+    "sky130_fd_sc_hd__buf_1"
+  ],
+  "SYNTH_EXCLUDED_CELL_FILE": "dir::area_no_synth.cells",
+  "RUN_POST_GRT_DESIGN_REPAIR": true,
+  "RSZ_CORNERS": [
+    "max_ss_100C_1v60",
+    "min_ff_n40C_1v95"
+  ],
+  "SETUP_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_SLEW_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_CAP_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "SYNTH_CLOCKGATE_MIN_WIDTH": 64,
+  "SYNTH_CLOCKGATE_POSEDGE_ICG": "sky130_fd_sc_hd__dlclkp_1/GATE/CLK/GCLK",
+  "GRT_ADJUSTMENT": 0.15,
+  "DESIGN_REPAIR_MAX_SLEW_PCT": 10,
+  "GRT_DESIGN_REPAIR_MAX_SLEW_PCT": 40
+}

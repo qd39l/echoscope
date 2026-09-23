@@ -1,0 +1,8 @@
+{
+  "reason": "Public attribution only; all other parsed project metadata is unchanged.",
+  "changed_fields": [
+    "project.author"
+  ],
+  "build_info_sha256": "0abdbccd1a9b7ad5b862e820c1613bc94d52dd2b5150efdeef3593a0dc42b329",
+  "public_info_sha256": "20425db4e2ea01b08c713574e26ed048c6d5a041c10f79d7cdbc3e85e91df2fa"
+}
