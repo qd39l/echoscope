@@ -1,0 +1,49 @@
+[options]
+
+[gold]
+read_verilog src/project.v src/echo_engine.v
+hierarchy -top tt_um_qd39l_echoscope
+add -inout VPWR 1 tt_um_qd39l_echoscope
+add -inout VGND 1 tt_um_qd39l_echoscope
+rename tt_um_qd39l_echoscope equivalence_core
+read_verilog -formal test/formal_environment.v
+prep -top tt_um_qd39l_echoscope -flatten
+memory_map
+clk2fflogic
+opt_clean
+splitnets
+
+[gate]
+# Boolean/sequential Liberty models; supplies are ideal, as in functional GLS.
+# Keep the actual integrated clock gate and its latch in the proof.
+read_liberty -ignore_miss_func /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+add -inout VPWR 1
+add -inout VGND 1
+add -inout VPB 1
+add -inout VNB 1
+read_verilog -nooverwrite -noblackbox test/formal_clockgate.v
+read_verilog -nooverwrite -noblackbox test/formal_physical.v
+rename proof_dlclkp sky130_fd_sc_hd__dlclkp_1
+read_verilog runs/wokwi/final/pnl/tt_um_qd39l_echoscope.pnl.v
+rename tt_um_qd39l_echoscope equivalence_core
+read_verilog -formal test/formal_environment.v
+prep -top tt_um_qd39l_echoscope -flatten
+memory_map
+clk2fflogic
+opt_clean
+splitnets
+
+[match tt_um_qd39l_echoscope]
+# These RTL registers have identical reset/enable/data equations; synthesis
+# merges last_buttons[3] into difference_view. Include both gold registers in
+# the equivalence obligation rather than leaving one hidden from induction.
+gold-match /^core\.last_buttons\[3\]$/ core.difference_view
+
+[collect tt_um_qd39l_echoscope]
+# Preserve relationships among aliased wrapper/core nets and the gated clock.
+# A whole-design partition avoids artificial independent cuts at these nets.
+bind *
+
+[strategy simple]
+use sat
+depth 20

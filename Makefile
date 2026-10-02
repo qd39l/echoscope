@@ -10,9 +10,7 @@ export DYLD_FALLBACK_LIBRARY_PATH := $(HOMEBREW_PREFIX)/lib:$(DYLD_FALLBACK_LIBR
 
 .PHONY: test lint config gds gl-test preview formal submission physical-pin-audit precheck evidence privacy
 test: lint
-	$(MAKE) -C test
-	mkdir -p build/verification
-	cp test/results.xml build/verification/rtl-results.xml
+	$(PYTHON) tools/run_cocotb.py
 lint:
 	verilator --lint-only -Wall -Wno-DECLFILENAME --top-module tt_um_qd39l_echoscope src/project.v src/echo_engine.v
 config:
@@ -20,14 +18,19 @@ config:
 gds: config
 	./scripts/harden.sh
 gl-test:
-	cp runs/wokwi/final/pnl/tt_um_qd39l_echoscope.pnl.v test/gate_level_netlist.v
-	$(MAKE) -C test GATES=yes
-	mkdir -p build/verification
-	cp test/results.xml build/verification/gate-results.xml
+	$(PYTHON) tools/run_cocotb.py --gate
 preview:
 	$(PYTHON) -m http.server 8765 --bind 127.0.0.1 --directory demo
 formal:
 	./scripts/formal.sh
+formal-safety:
+	bash scripts/formal_safety.sh
+equivalence:
+	bash scripts/equivalence.sh
+timing-audit:
+	$(PYTHON) tools/audit_timing.py
+clockgate-model-test:
+	$(PYTHON) tools/check_clockgate_model.py
 physical-pin-audit:
 	$(PYTHON) tools/audit_physical_pins.py
 precheck:
@@ -41,3 +44,25 @@ submission: evidence
 	$(PYTHON) tools/verify_submission.py
 privacy:
 	$(PYTHON) tools/check_privacy.py --history
+
+# Strict receiver is shared by the live viewer and both simulation backends.
+.PHONY: video video-test video-gl-test video-monitor-test
+video:
+	$(PYTHON) tools/video_sim.py serve
+video-monitor-test:
+	$(PYTHON) -m pytest -q test/test_video_monitor.py
+video-test: video-monitor-test
+	$(PYTHON) tools/video_sim.py test
+video-gl-test: video-monitor-test
+	$(PYTHON) tools/video_sim.py test --backend gate
+
+# Deliberately serial: receipts bind each completed run to its inputs.
+.PHONY: formal-safety equivalence timing-audit clockgate-model-test release-check
+release-check:
+	$(PYTHON) -m pytest -q tools/tests
+	$(MAKE) test
+	$(PYTHON) tools/verify_model.py
+	$(MAKE) formal formal-safety equivalence
+	$(MAKE) gl-test video-test video-gl-test
+	$(MAKE) clockgate-model-test timing-audit physical-pin-audit
+	$(MAKE) precheck evidence privacy

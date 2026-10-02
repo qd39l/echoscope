@@ -14,8 +14,11 @@ backwards—exactly. The ASIC reconstructs its own past instead of recording it.
 
 The fabrication target is **TTSKY26d / SKY130 / 1×1 tile / 25 MHz**.
 The final local build fits one tile with **12,933.7 µm² of standard cells**,
-zero physical or timing violations across nine corners, 15 passing Tiny Tapeout
-prechecks, and five passing final-netlist tests. A two-tile reference was also evaluated; the
+zero DRC/LVS/antenna, setup, hold, slew or capacitance violations across nine corners,
+15 passing Tiny Tapeout prechecks, and seven passing final-netlist tests.
+Two clock-tree fanout exceptions (16 loads versus a configured limit of 10)
+are explicitly accepted; see [verification](docs/verification.md).
+A two-tile reference was also evaluated; the
 [PPA report](docs/ppa.md) records the comparison and architectural savings.
 This repository includes synthesizable
 Verilog, independent reference models, RTL and gate-level tests, a formal
@@ -35,6 +38,14 @@ Then visit http://127.0.0.1:8765. Try **Clone A → B**, **Flip one bit**, and
 The browser runs at 12 generations/s for inspection; silicon advances once
 per VGA frame (59.524 generations/s). The browser is a mathematical reference,
 not an HDL simulator. `docs/images/rtl-frame.png` is a real RTL pixel capture.
+
+## Watch the actual RTL
+
+Run `make video` and open `http://127.0.0.1:8766` for the interactive pin-driven
+VGA monitor. `make video-test` checks complete frames against the independent
+model; `make video-gl-test PDK_ROOT=/path/to/pdk` runs the same receiver against
+the accepted powered netlist. See [VGA validation](docs/video-validation.md)
+for coverage, limitations, and the remaining real-board acceptance steps.
 
 ## How the hardware does it
 
@@ -70,16 +81,23 @@ Install Icarus Verilog, Verilator, Node.js, Python 3.11, uv, and Docker.
 make test              # Lint + RTL, raster, controls, audio
 .venv/bin/python tools/verify_model.py
 make formal            # Exhaustive Yosys SAT proof in a network-disabled container
+make formal-safety     # Inductive controller/engine safety + negative controls
 make gds               # LibreLane 3.0.14, SKY130, fixed 1x1 footprint
 make physical-pin-audit
 make gl-test           # Public-pin tests against the powered gate-level netlist
 make precheck          # Official Tiny Tapeout geometric/electrical prechecks
 make evidence          # Collect compact, checked verification results
+make release-check     # Fresh complete local signoff, with source-bound receipts
 make submission        # Build local submission package; does not upload it
 make privacy           # Check publishable files and branch/tag/remote history
 ```
 
 The checked package is written to `build/echoscope-ttsky26d-1x1.zip`.
+
+`make equivalence` proves RTL-to-netlist equivalence and is required by the
+release checks. All partitions must pass with current input hashes; unknowns
+and timeouts fail. Its clock and cell-model assumptions are documented in the
+[verification record](docs/verification.md).
 
 The macOS flow streams only project source and support files into temporary,
 network-disabled containers. It does not bind-mount host directories. It uses

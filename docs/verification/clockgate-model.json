@@ -1,0 +1,13 @@
+{
+  "input_sha256": {
+    "build/pdk-models/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v": "7d4b1441d06b0f2b9662befa675a0484d77149e04eb42a5f1fa2d4cfded7b2ce",
+    "build/pdk-models/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v": "12d5d6448ccf265c544d88402d5c10ab6de9bee8b8cde48eee1f31ea8c3c3e45",
+    "test/clockgate_tb.v": "a11aaafe56ac1f5bf776fbf00f3ada6d31125a341e4a48e57155edca88e8c8f4",
+    "test/formal_clockgate.v": "4c066a4d3e1e340935227692341160e0d0d1eef411d9381444f366ec5247d59c",
+    "tools/check_clockgate_model.py": "41706eafeb0dfb97f14f15e1d4efea4268a1f06c5952fbd35b7761123018a1c9",
+    "tools/verification_manifest.py": "7f9455b6ed5def2c438b2c4fc1832eecdac2c631e9b134204cf9e17fef82f691"
+  },
+  "observations": 8192,
+  "result": "pass",
+  "sequences": 256
+}

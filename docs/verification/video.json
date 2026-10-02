@@ -1,0 +1,77 @@
+{
+  "gate": {
+    "backend": "gate",
+    "cycles": 43210105,
+    "frames_checked": 63,
+    "full_regression": true,
+    "horizontal_hz": 31250,
+    "input_sha256": {
+      "build/pdk-models/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v": "7d4b1441d06b0f2b9662befa675a0484d77149e04eb42a5f1fa2d4cfded7b2ce",
+      "build/pdk-models/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v": "12d5d6448ccf265c544d88402d5c10ab6de9bee8b8cde48eee1f31ea8c3c3e45",
+      "runs/wokwi/final/pnl/tt_um_qd39l_echoscope.pnl.v": "904ddac7a12b5febf0842da152625f23394f4dd4d582c225f034f4f77e96528a",
+      "sim/video_tb.v": "22f61e67b2a5220e8e74443a215af3ee7b7cf471a3611b8747fa703a79578bef",
+      "test/requirements.txt": "cf1e5d8558863b686d2ecdf6e6b0c04fa1bb68b2eb16fe7a8b0c00ce17dd6070",
+      "tools/model.py": "6dd193e3b8cb691aade6e8833fd4426c0d0bbd5fd3da76237cd8b29f6d39af85",
+      "tools/verification_manifest.py": "7f9455b6ed5def2c438b2c4fc1832eecdac2c631e9b134204cf9e17fef82f691",
+      "tools/video_monitor.py": "e7863d420f64d60b9f157815c8e62f413ea2e4b4d5e98797b0148c4e531229b6",
+      "tools/video_sim.py": "2a952b0810a427ff32fa3fa2ea3dc30bb2b7c5c87726ff612cc9051c75765021"
+    },
+    "interruption_cases": 18,
+    "pixel_clock_hz": 25000000,
+    "randomized_commands": 16,
+    "result": "pass",
+    "scenarios": [
+      "pause",
+      "step",
+      "held button",
+      "reverse round trip",
+      "perturb",
+      "difference view",
+      "clone priority",
+      "automatic forward/reverse",
+      "reset in active video",
+      "disable/reacquire",
+      "initialize disabled",
+      "commands before/after frame acceptance"
+    ],
+    "timing_model": "unit-delay cells",
+    "vertical_hz": 59.523809523809526
+  },
+  "verilator": {
+    "backend": "verilator",
+    "cycles": 43210105,
+    "frames_checked": 63,
+    "full_regression": true,
+    "horizontal_hz": 31250,
+    "input_sha256": {
+      "sim/video_driver.cpp": "e1a50581670cb96866a51cf5324f436c80a94da4da714237ab102e8d18a90362",
+      "src/echo_engine.v": "0df98fd8247786fbbfc9773cd44ff074d7440ba5512a566688a7ef312a7e894f",
+      "src/project.v": "de299af4410eb2ca426f74534b82a268b5d025f77943e99646b9e72a5007d0ab",
+      "test/requirements.txt": "cf1e5d8558863b686d2ecdf6e6b0c04fa1bb68b2eb16fe7a8b0c00ce17dd6070",
+      "tools/model.py": "6dd193e3b8cb691aade6e8833fd4426c0d0bbd5fd3da76237cd8b29f6d39af85",
+      "tools/verification_manifest.py": "7f9455b6ed5def2c438b2c4fc1832eecdac2c631e9b134204cf9e17fef82f691",
+      "tools/video_monitor.py": "e7863d420f64d60b9f157815c8e62f413ea2e4b4d5e98797b0148c4e531229b6",
+      "tools/video_sim.py": "2a952b0810a427ff32fa3fa2ea3dc30bb2b7c5c87726ff612cc9051c75765021"
+    },
+    "interruption_cases": 18,
+    "pixel_clock_hz": 25000000,
+    "randomized_commands": 16,
+    "result": "pass",
+    "scenarios": [
+      "pause",
+      "step",
+      "held button",
+      "reverse round trip",
+      "perturb",
+      "difference view",
+      "clone priority",
+      "automatic forward/reverse",
+      "reset in active video",
+      "disable/reacquire",
+      "initialize disabled",
+      "commands before/after frame acceptance"
+    ],
+    "timing_model": "RTL",
+    "vertical_hz": 59.523809523809526
+  }
+}

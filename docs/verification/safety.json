@@ -1,0 +1,18 @@
+{
+  "input_sha256": {
+    "scripts/formal_mutations.sh": "13e5e19aa183d8b40273ee87c2d16b78b5dccaf5f9f21b904f8128be8b7a066f",
+    "scripts/formal_safety.sh": "08ef3bc9c6f5d5bdc428ff54d213b9ab52e02246f3fbeaa85eb593281b7ef223",
+    "src/echo_engine.v": "0df98fd8247786fbbfc9773cd44ff074d7440ba5512a566688a7ef312a7e894f",
+    "src/project.v": "de299af4410eb2ca426f74534b82a268b5d025f77943e99646b9e72a5007d0ab",
+    "test/formal_controller_properties.vh": "a06d42d0b2575647aa81cf0f65f7927fc4792ba50b6cfeacb6f552f2c0e7b2cc",
+    "test/formal_engine_safety.vh": "4386566a419f11b180c162c07556f92f7e203118a7f462463bbf86ba4683ea56",
+    "tools/formal_safety.py": "3c5dc9bf7e48df9dc469a834a9604eba4375645b0963dfe9eb87e21273e8a311",
+    "tools/proof_receipt.py": "11a9dfb687dcc10375dadf1ce63da6da66ebc3c9ad2f57bdf07703264a5a6f4c",
+    "tools/verification_manifest.py": "7f9455b6ed5def2c438b2c4fc1832eecdac2c631e9b134204cf9e17fef82f691"
+  },
+  "output_sha256": {
+    "build/safety/formal.log": "6d64707c3e9192a45cac5fe25a89d918a0f4dc3ee4bba5996e0dfb7564d87768",
+    "build/safety/mutations.log": "71f6eb37eeb9181c57d4245acfcb65de7e43f2c72e6b80bfe68acfbfdb3e723c"
+  },
+  "result": "pass"
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 import shutil
@@ -11,6 +12,11 @@ import xml.etree.ElementTree as ET
 
 from audit_physical_pins import main as audit_pins
 from source_manifest import matches_build
+from verification_manifest import check_receipt, snapshot
+from run_cocotb import inputs as simulation_inputs
+from proof_receipt import inputs as proof_inputs, directory as proof_directory
+from audit_timing import audit as audit_timing
+from run_precheck import evidence_inputs as precheck_inputs
 
 ROOT = Path(__file__).resolve().parents[1]
 RUN = ROOT / 'runs/wokwi'
@@ -66,9 +72,45 @@ def main():
             bank_bits.append(q[1])
     assert len(set(bank_bits)) == 128
     assert digest(ROOT / f'build/precheck/check/{TOP}.gds') == digest(FINAL / f'gds/{TOP}.gds'), 'Precheck used another layout'
-    rtl = check_xml(ROOT / 'build/verification/rtl-results.xml', 6, 0)
-    gl = check_xml(ROOT / 'build/verification/gate-results.xml', 5, 1)
+    pdk_root = os.environ.get('PDK_ROOT', str(ROOT/'.pdk'))
+    for gate,kind in ((False,'rtl'),(True,'gate')):
+        check_receipt(ROOT/f'build/verification/{kind}-receipt.json',
+                      simulation_inputs(gate,pdk_root),[ROOT/f'build/verification/{kind}-results.xml'])
+    rtl = check_xml(ROOT / 'build/verification/rtl-results.xml', 8, 0)
+    gl = check_xml(ROOT / 'build/verification/gate-results.xml', 7, 1)
+    for kind in ('formal','safety'):
+        folder = proof_directory(kind)
+        outputs = [folder/'formal.log'] + ([folder/'mutations.log'] if kind == 'safety' else [])
+        check_receipt(folder/'receipt.json',proof_inputs(kind),outputs)
+    video_reports = {}
+    for backend in ('verilator','gate'):
+        report = json.loads((ROOT/f'build/video/{backend}/results/report.json').read_text())
+        assert report['result'] == 'pass' and report['full_regression'] is True
+        assert report['frames_checked'] == 63 and report['interruption_cases'] == 18
+        assert report['randomized_commands'] == 16
+        assert report['backend'] == backend
+        shared = ['tools/video_sim.py','tools/video_monitor.py','tools/model.py',
+                  'tools/verification_manifest.py','test/requirements.txt']
+        paths = [ROOT/name for name in shared]
+        if backend == 'verilator':
+            paths += [ROOT/name for name in ('src/project.v','src/echo_engine.v','sim/video_driver.cpp')]
+        else:
+            library = Path(pdk_root)/'sky130A/libs.ref/sky130_fd_sc_hd/verilog'
+            paths += [library/'primitives.v',library/'sky130_fd_sc_hd.v',
+                      FINAL/f'pnl/{TOP}.pnl.v',ROOT/'sim/video_tb.v']
+        assert report['input_sha256'] == snapshot(paths), f'Stale {backend} video evidence'
+        video_reports[backend] = report
+    timing_audit = audit_timing()
+    clockgate_model = json.loads((ROOT/'build/clockgate-model/report.json').read_text())
+    library = Path(pdk_root)/'sky130A/libs.ref/sky130_fd_sc_hd/verilog'
+    model_inputs = [ROOT/'test/formal_clockgate.v',ROOT/'test/clockgate_tb.v',
+                    library/'primitives.v',library/'sky130_fd_sc_hd.v',
+                    ROOT/'tools/check_clockgate_model.py',ROOT/'tools/verification_manifest.py']
+    assert clockgate_model['result'] == 'pass'
+    assert clockgate_model['input_sha256'] == snapshot(model_inputs)
+    assert clockgate_model['sequences'] == 256 and clockgate_model['observations'] == 8192
     precheck_root = ROOT / 'build/precheck/tt/precheck/reports'
+    check_receipt(ROOT/'build/precheck/receipt.json',precheck_inputs(),[precheck_root/'results.xml'])
     precheck = check_xml(precheck_root / 'results.xml', 15, 0)
     proof_root = ROOT / 'build/proof'
     assert (proof_root / 'formal.log').read_text().count('SAT proof finished - no model found: SUCCESS!') == 6
@@ -86,6 +128,18 @@ def main():
                'source_sha256': proof_hashes})
     write_json('artifacts.json', {kind: digest(FINAL / f'{kind}/{TOP}.{suffix}')
                for kind, suffix in (('gds','gds'),('lef','lef'),('pnl','pnl.v'))})
+    write_json('video.json',video_reports)
+    write_json('timing-audit.json',timing_audit)
+    write_json('safety.json',json.loads((ROOT/'build/safety/receipt.json').read_text()))
+    write_json('clockgate-model.json',clockgate_model)
+    # Whole-netlist equivalence is required; unknown is never a pass.
+    eq = ROOT/'build/equivalence/strategy-results.json'
+    result = json.loads(eq.read_text())
+    assert result['result'] == 'pass' and result['partitions']
+    assert all(value == 'PASS' for value in result['partitions'].values())
+    check_receipt(eq.parent/'receipt.json',proof_inputs('equivalence'),[eq])
+    result['input_sha256'] = snapshot(proof_inputs('equivalence'))
+    write_json('equivalence.json',result)
     shutil.copyfile(precheck_root / 'results.md', OUT / 'precheck.md')
     synthesis = next(RUN.glob('*yosys-synthesis/reports/stat.rpt'))
     timing = next(RUN.glob('*stapostpnr/summary.rpt'))

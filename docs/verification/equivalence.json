@@ -1,0 +1,31 @@
+{
+  "input_sha256": {
+    "runs/wokwi/final/pnl/tt_um_qd39l_echoscope.pnl.v": "904ddac7a12b5febf0842da152625f23394f4dd4d582c225f034f4f77e96528a",
+    "scripts/equivalence.sh": "6a8493e82e52ef16ad55d221c4bc140af9fe2424a08abedc47599f5cf5627a38",
+    "src/echo_engine.v": "0df98fd8247786fbbfc9773cd44ff074d7440ba5512a566688a7ef312a7e894f",
+    "src/project.v": "de299af4410eb2ca426f74534b82a268b5d025f77943e99646b9e72a5007d0ab",
+    "test/formal_clockgate.v": "4c066a4d3e1e340935227692341160e0d0d1eef411d9381444f366ec5247d59c",
+    "test/formal_environment.v": "b082961b9146b0cacf74eb827d66cf07bc22ead4d6ef0000e345c01bebcc1cdb",
+    "test/formal_physical.v": "85cf77be31477d7f657da72f2d935843c875d5ee0666c1a5b65fe283ed4d3d8a",
+    "test/netlist.eqy": "f82d2ea62280c08eb8fc99749712e47e174f1bb91325bc2481057f9436525069",
+    "tools/proof_receipt.py": "11a9dfb687dcc10375dadf1ce63da6da66ebc3c9ad2f57bdf07703264a5a6f4c",
+    "tools/run_eqy_strategies.py": "3556c1cac5c8252606d44a7c033e6229a3dc49d20b46a056370201b795428f1c",
+    "tools/verification_manifest.py": "7f9455b6ed5def2c438b2c4fc1832eecdac2c631e9b134204cf9e17fef82f691"
+  },
+  "partitions": {
+    "strategies/tt_um_qd39l_echoscope.address.0/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.VGND/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.VPWR/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.uio_out.0/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.uio_out.1/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.uio_out.2/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.uio_out.3/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.core.uio_out.4/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.uio_out.0/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.uio_out.1/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.uio_out.2/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.uio_out.3/simple/status": "PASS",
+    "strategies/tt_um_qd39l_echoscope.uio_out.4/simple/status": "PASS"
+  },
+  "result": "pass"
+}

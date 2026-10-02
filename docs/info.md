@@ -60,6 +60,15 @@ the next press. Commands prioritize clone, then flip, then step; a clone or
 flip consumes that frame's normal animation step. Toggling pause, reverse,
 view, or mute does not erase either world. Reset restarts the experiment.
 
+VGA refresh continues in hardware while paused. Pausing holds the canonical
+world state, so subsequent frames repeat the same picture. Single steps and
+interventions are accepted during vertical blanking and affect the next
+complete picture. Automatic mode advances once per frame (59.524 steps/s);
+there is no programmable animation-speed divider. For slower evolution, hold
+pause high and pulse single-step from a host at the desired rate, respecting
+the two-frame high/low protocol. Use pause, not `ena`, to hold a stable display:
+deasserting `ena` intentionally stops the raster and drives sync inactive.
+
 To demonstrate reversal: pause, make N forward steps, then N reverse steps.
 The picture returns exactly. To see a butterfly effect: clone, flip a cell,
 then single-step. The discrepancy expands through the two worlds.

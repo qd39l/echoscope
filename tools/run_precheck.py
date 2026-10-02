@@ -21,6 +21,16 @@ ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / "build/precheck"
 
 
+def evidence_inputs():
+    top = 'tt_um_qd39l_echoscope'
+    return [ROOT/'info.yaml', ROOT/'tools/run_precheck.py', ROOT/'scripts/precheck.sh',
+            ROOT/'tools/verification_manifest.py',
+            *[ROOT/f'runs/wokwi/final/{kind}/{top}.{suffix}'
+              for kind,suffix in [('gds','gds'),('lef','lef'),('pnl','pnl.v')]],
+            *[p for folder in ('tt/precheck','tt/tech') for p in (ROOT/folder).rglob('*')
+              if p.is_file() and '__pycache__' not in p.parts and 'reports' not in p.parts]]
+
+
 def extract(data: bytes, destination: Path) -> None:
     with tarfile.open(fileobj=io.BytesIO(data)) as archive:
         archive.extractall(destination, filter="data")
@@ -57,10 +67,15 @@ def source_archive():
 
 
 def main() -> int:
+    from verification_manifest import snapshot, require_unchanged
     pdk_root = Path(os.environ.get("PDK_ROOT", ROOT / ".pdk")).absolute()
     if not (pdk_root / "sky130A/libs.tech/klayout/tech").is_dir():
         raise SystemExit("Set PDK_ROOT to a local SKY130 PDK cache (see docs/toolchain.md).")
     WORK.mkdir(parents=True, exist_ok=True)
+    receipt = WORK/'receipt.json'
+    receipt.unlink(missing_ok=True)
+    paths = evidence_inputs()
+    before = snapshot(paths)
     # Work on a disposable copy; leave the pinned support-tools checkout intact.
     for part in ("precheck", "tech"):
         destination = WORK / "tt" / part
@@ -103,8 +118,13 @@ def main() -> int:
                    PATH=str(bin_dir) + os.pathsep + env["PATH"],
                    ECHOSCOPE_PRECHECK_BRIDGE=json.dumps({"container": container,
                                                         "pdk_root": str(pdk_root)}))
-        return subprocess.run([sys.executable, "precheck.py", "--gds", str(check / f"{top}.gds")],
-                              cwd=WORK / "tt/precheck", env=env).returncode
+        result = subprocess.run([sys.executable, "precheck.py", "--gds", str(check / f"{top}.gds")],
+                                cwd=WORK / "tt/precheck", env=env).returncode
+        require_unchanged(paths,before)
+        if result == 0:
+            receipt.write_text(json.dumps(dict(result='pass',input_sha256=before,
+                output_sha256=snapshot([WORK/'tt/precheck/reports/results.xml'])),indent=2)+'\n')
+        return result
     finally:
         subprocess.run(["docker", "rm", "-f", container], stdout=subprocess.DEVNULL, check=False)
 

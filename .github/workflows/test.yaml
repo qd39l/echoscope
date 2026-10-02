@@ -18,11 +18,15 @@ jobs:
       - run: python tools/check_privacy.py --history
       - run: make lint
       - run: python tools/verify_model.py
-      - run: make -C test
+      - run: make test PYTHON=python
+      - run: make video-test PYTHON=python
+      - run: python -m pytest -q tools/tests
       - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: simulation-results
           path: |
             test/results.xml
+            build/verification/*
             test/output/*
+            build/video/verilator/results/*

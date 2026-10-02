@@ -1,0 +1,151 @@
+{
+  "accepted_fanout_exceptions": [
+    "clkbuf_0__0653_/X",
+    "clkbuf_0_clk_regs/X"
+  ],
+  "corners": {
+    "max_ff_n40C_1v95": {
+      "clock_gate_slack_ns": {
+        "max": 30.569656,
+        "min": 0.758951
+      },
+      "hold_ns": 0.04008582468312291,
+      "setup_ns": 22.730820535884686,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "max_ss_100C_1v60": {
+      "clock_gate_slack_ns": {
+        "max": 28.37524,
+        "min": 2.719783
+      },
+      "hold_ns": 0.6647458327500037,
+      "setup_ns": 21.053225536595782,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "max_tt_025C_1v80": {
+      "clock_gate_slack_ns": {
+        "max": 29.943417,
+        "min": 1.292894
+      },
+      "hold_ns": 0.2129678715880486,
+      "setup_ns": 22.249774208385983,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "min_ff_n40C_1v95": {
+      "clock_gate_slack_ns": {
+        "max": 30.687216,
+        "min": 0.706157
+      },
+      "hold_ns": 0.03711037138182469,
+      "setup_ns": 22.798538813231506,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "min_ss_100C_1v60": {
+      "clock_gate_slack_ns": {
+        "max": 28.687893,
+        "min": 2.555852
+      },
+      "hold_ns": 0.6564015072832298,
+      "setup_ns": 21.221764501927847,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "min_tt_025C_1v80": {
+      "clock_gate_slack_ns": {
+        "max": 30.117313,
+        "min": 1.216148
+      },
+      "hold_ns": 0.20812729906378222,
+      "setup_ns": 22.349799088484666,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "nom_ff_n40C_1v95": {
+      "clock_gate_slack_ns": {
+        "max": 30.625696,
+        "min": 0.731527
+      },
+      "hold_ns": 0.03905154088413057,
+      "setup_ns": 22.76372577090836,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "nom_ss_100C_1v60": {
+      "clock_gate_slack_ns": {
+        "max": 28.52039,
+        "min": 2.636679
+      },
+      "hold_ns": 0.6610899792488208,
+      "setup_ns": 21.136543780147413,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    },
+    "nom_tt_025C_1v80": {
+      "clock_gate_slack_ns": {
+        "max": 30.025537,
+        "min": 1.254439
+      },
+      "hold_ns": 0.21105839895399225,
+      "setup_ns": 22.29806447043082,
+      "unannotated_functional_nets": 0,
+      "unconstrained_checks": "clean"
+    }
+  },
+  "fanout_actual": 16,
+  "fanout_limit": 10,
+  "input_sha256": {
+    "runs/wokwi/56-openroad-stapostpnr/max_ff_n40C_1v95/checks.rpt": "465994d5545ba420a8ff293f590f5a895aa7d1457272ac560ad514c78a2db097",
+    "runs/wokwi/56-openroad-stapostpnr/max_ff_n40C_1v95/clock.rpt": "0aa28932c868e91d3275756a9518056021ce3b540af96527cc1120f089f1d654",
+    "runs/wokwi/56-openroad-stapostpnr/max_ff_n40C_1v95/filter_unannotated_metrics.json": "718af5744eb2a3d426c1499fbe946ba79edcf54ac04fe73c54c977547f0b58ef",
+    "runs/wokwi/56-openroad-stapostpnr/max_ff_n40C_1v95/max.rpt": "f20346d6d5cd052690a4322efd176b9c2d2201607b0353d591b433a24a195865",
+    "runs/wokwi/56-openroad-stapostpnr/max_ff_n40C_1v95/min.rpt": "24ddcdf4021b44a100881a5c7c2d55c7d62fc33f209a220750d999bc31960199",
+    "runs/wokwi/56-openroad-stapostpnr/max_ss_100C_1v60/checks.rpt": "87cc22340638aeedacd163cf848aff16555459f2ebcd836210843b6e9f43005f",
+    "runs/wokwi/56-openroad-stapostpnr/max_ss_100C_1v60/clock.rpt": "ff612304257f9ca784a2f5cdb9e2c2fc05b5177266992d2f1e07b7816664cef6",
+    "runs/wokwi/56-openroad-stapostpnr/max_ss_100C_1v60/filter_unannotated_metrics.json": "ea097c67384eb2811210490c09d7114a759175a669a3f7756d68022a06b14f34",
+    "runs/wokwi/56-openroad-stapostpnr/max_ss_100C_1v60/max.rpt": "a688b2f9c152634695fb471fbb37adb6c65130ba5ff0e631c60c71809305c29e",
+    "runs/wokwi/56-openroad-stapostpnr/max_ss_100C_1v60/min.rpt": "97a267805fd0a53a822d3d907a69cfdb2e23814fffba62eee67e168fd2ae07ee",
+    "runs/wokwi/56-openroad-stapostpnr/max_tt_025C_1v80/checks.rpt": "1a4071ac53ffee7d4162c3f5a4cb6d98422018ce13566b2a6b3fb8acbb728882",
+    "runs/wokwi/56-openroad-stapostpnr/max_tt_025C_1v80/clock.rpt": "070d61a048a2818bcb0692474fbb9cf6b9911b1832d6730614c2837f71473b93",
+    "runs/wokwi/56-openroad-stapostpnr/max_tt_025C_1v80/filter_unannotated_metrics.json": "e64c338e423ae7f71f0043fa98ec8dac8ba37a42da0730fa6787f69bcd1da038",
+    "runs/wokwi/56-openroad-stapostpnr/max_tt_025C_1v80/max.rpt": "1975476d43536b5481f0b134db57b1cfff897c72f9b5b2fb970e0d92a1372a73",
+    "runs/wokwi/56-openroad-stapostpnr/max_tt_025C_1v80/min.rpt": "ecc82ce6bfc26b2100335729c2224e7f413a4eaf824f189fd47d23ff7e714491",
+    "runs/wokwi/56-openroad-stapostpnr/min_ff_n40C_1v95/checks.rpt": "453aa4830891b8c92fa0fb6aef6bd3b3e90dd496ee1bdbed10a65a7968f3e8cc",
+    "runs/wokwi/56-openroad-stapostpnr/min_ff_n40C_1v95/clock.rpt": "dc1fd5a2b3dfcef4c86f7c78e427ef1f495ad68840750115ee66ff2438e2a3ba",
+    "runs/wokwi/56-openroad-stapostpnr/min_ff_n40C_1v95/filter_unannotated_metrics.json": "b885543f56b22b8f0c0cdbbc42e2fe6cc1ff03bb800c18c2aa6bc41fdfe75ec8",
+    "runs/wokwi/56-openroad-stapostpnr/min_ff_n40C_1v95/max.rpt": "3536b35842fc7817fcf38125caac8d78c8caf561fb748f99a6382cf07efd367b",
+    "runs/wokwi/56-openroad-stapostpnr/min_ff_n40C_1v95/min.rpt": "8503b40981c7238f3c9038646513ff9cb1025aa8e1b495170d46dd37202235c4",
+    "runs/wokwi/56-openroad-stapostpnr/min_ss_100C_1v60/checks.rpt": "fe456ef507367dae174ab4940d6fa5eb73ea09b73ffca1696e3a0795d5237efc",
+    "runs/wokwi/56-openroad-stapostpnr/min_ss_100C_1v60/clock.rpt": "6acd066c36dae2adaa945afcfa43912d682accac18e8e7a17436f51b1208d43e",
+    "runs/wokwi/56-openroad-stapostpnr/min_ss_100C_1v60/filter_unannotated_metrics.json": "3166131272631d03dc839ad54ee5576573d0d7bbd660dae2d21b25fd09e2872e",
+    "runs/wokwi/56-openroad-stapostpnr/min_ss_100C_1v60/max.rpt": "12a66cd1ceb529cf1b317d869b8451af1ea9625b259baab41fed5db30b393c4b",
+    "runs/wokwi/56-openroad-stapostpnr/min_ss_100C_1v60/min.rpt": "8eba39da1ddba40142ae0351ff1245adf46381f2d9a7298ba9749f7174b20367",
+    "runs/wokwi/56-openroad-stapostpnr/min_tt_025C_1v80/checks.rpt": "95dbd2ad60c9b1e8892f5de8370ceabb0f98fb59cafdc67c9d79db3bcce2531d",
+    "runs/wokwi/56-openroad-stapostpnr/min_tt_025C_1v80/clock.rpt": "66c63892ea008bbde796862fc1bb44532cbdd4c87a36f5a14f307a22d9dd14eb",
+    "runs/wokwi/56-openroad-stapostpnr/min_tt_025C_1v80/filter_unannotated_metrics.json": "a52eb300b2e5178f2d97968c868fcb632f9fa8f23f3b3653fe2e8670d17f31ea",
+    "runs/wokwi/56-openroad-stapostpnr/min_tt_025C_1v80/max.rpt": "e140f55c74baee4ff4c5f0d44c205c4a392940201fc24f73dd586602d972ed83",
+    "runs/wokwi/56-openroad-stapostpnr/min_tt_025C_1v80/min.rpt": "daec2397bb5a99a20dbcb3ae0aeb2c29607278e730bdb7353c624d8436c1bb9f",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ff_n40C_1v95/checks.rpt": "67973ea10f2266c463dfcb6edad9a8f9fe89f524e9dde888e548c0506f169bb4",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ff_n40C_1v95/clock.rpt": "29548115e2c9e0a6d40fc3100a49e363d70c50dd8742d59075c76a65f4e249f7",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ff_n40C_1v95/filter_unannotated_metrics.json": "fcf4d292d7f60f3193a1c5a51cbb2ac35d604d1bcbb3862ca62d0e9673459d6c",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ff_n40C_1v95/max.rpt": "c3618c6cc798e339876048619f5b5df91d6cba9e7778128ba618496b5d3cde17",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ff_n40C_1v95/min.rpt": "ffae10b20d41afb067857c89c258e9bad2296e7d9873b97cf4ec5938078664c5",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ss_100C_1v60/checks.rpt": "d192254050371d0fe4222ef76b47bfd3f6b3a116d5ca53e17ef7cbf7afa516c3",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ss_100C_1v60/clock.rpt": "45469a3fb41cc102e7a8b5682d14cfd2855119ad374d07b35c59bd0bd76afc5e",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ss_100C_1v60/filter_unannotated_metrics.json": "e4ffb5b35c4cdd11d54b27530bfd6f1f5d87e05dc6d7e1ffea6dbb4b4325a916",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ss_100C_1v60/max.rpt": "60e559bee41aa728f4c8cd1aa631df193d744768ab90b66da5be58d3ff0037a6",
+    "runs/wokwi/56-openroad-stapostpnr/nom_ss_100C_1v60/min.rpt": "949faa690738f10d3ce1c20f7cd07f42648f5e386acbafff763d867372ad8803",
+    "runs/wokwi/56-openroad-stapostpnr/nom_tt_025C_1v80/checks.rpt": "8e3d20485f787d610c07f2d14048b0a199835157a5748acd6d0d63db849e1a4d",
+    "runs/wokwi/56-openroad-stapostpnr/nom_tt_025C_1v80/clock.rpt": "331eaf62660259a070951708d387c2aff7b5a367a75eddce3baba235d1199947",
+    "runs/wokwi/56-openroad-stapostpnr/nom_tt_025C_1v80/filter_unannotated_metrics.json": "9100071916e049c7ea2d5a86c482b503c71830672b30d109a7926608cd507429",
+    "runs/wokwi/56-openroad-stapostpnr/nom_tt_025C_1v80/max.rpt": "2ceddb8f9f20fabd8b273c0a5062d1ef1449fffe58462612060dd464f6fdf28b",
+    "runs/wokwi/56-openroad-stapostpnr/nom_tt_025C_1v80/min.rpt": "6e76964f9bd940c2854e78a8e1195a56b26fd72844a512533d7c745d10557aa0",
+    "runs/wokwi/final/metrics.json": "c2539917b6ace778c626bcffab525d91c7bdf25ebd58eea71b1a0c44a598f3a5",
+    "runs/wokwi/final/sdc/tt_um_qd39l_echoscope.sdc": "971f68766bc7b605fd5c4ea05f0a14ba43573a71e572fd228e4a727668eacc57",
+    "tools/audit_timing.py": "7f478800a052fc25be4e9514fab1d86d7a641a7bb2fffbc63d3478d1ce0aa72d"
+  },
+  "result": "pass"
+}

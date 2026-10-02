@@ -72,3 +72,35 @@ inside the container. Finalization refuses to package a layout if those inputs
 have changed, except for the exact documented attribution-only hash pair in
 [publication notes](publication.md). The local provenance explicitly records whether a Git commit and
 remote exist and whether the checkout is dirty; it does not invent a CI run.
+
+## Additional release verification
+
+`make release-check PDK_ROOT=/path/to/pdk` runs the RTL and powered-netlist
+suites, full pin-only video regressions, original proofs, controller/engine
+inductive proofs, clock-gate model comparison, extracted timing audit,
+official precheck, evidence collection and privacy checks. Keep the working
+tree stable during this run: receipts deliberately reject changed inputs.
+The PDK path must include both standard-cell Verilog and technology files.
+
+The formal safety harness instruments disposable copies in `build/safety-inputs`;
+it does not change fabrication sources. The engine properties permit arbitrary
+reset, enable and commands. Controller properties assume normal VGA mode and
+are asserted after reset; other inputs and enable pauses remain arbitrary.
+They prove unbounded scheduling invariants by induction. The original engine
+proofs provide the arbitrary-state operation semantics used in the composition.
+Negative controls remove state-bank enable gating or accept commands during
+active video; the same assertions must produce bounded counterexamples.
+
+`make equivalence` is required by `release-check` and evidence collection. The pinned
+container includes EQY/Yosys but no GNU make, so `run_eqy_strategies.py` executes
+all generated SAT strategy scripts and checks every generated status. It does
+not alter solver commands or manufacture pass results. Each partition has a
+600-second limit. Missing results, errors, unknowns and timeouts return failure.
+EQY's setup-only `-m` invocation leaves an `UNKNOWN` marker before any strategy
+runs; the completed verdict is `build/equivalence/strategy-results.json`,
+validated against every generated strategy status and the source receipt.
+The explicit clock-phase wrapper models input setup time; it is not evidence
+for arbitrary asynchronous changes at a clock edge. The SKY130 clock-gate
+latch is modeled explicitly, and its logical translation is checked against
+the supplied PDK simulation primitive. No whole-netlist equivalence claim
+should be made unless every partition passes with current input hashes.

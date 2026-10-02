@@ -42,3 +42,10 @@ The clock/reset calls were checked against the
 The driver explicitly starts manual pulses low because `clock_project_once`
 toggles twice from the current level. Board setup and RP pin directions follow
 the [Tiny Tapeout demo-board guide](https://tinytapeout.com/guides/get-started-demoboard/).
+
+## Before connecting a display
+
+Run the [pin-driven VGA regression](../docs/video-validation.md) and use its
+FPGA/board acceptance checklist. `make video` provides interactive real-RTL
+video on the host. The physical FPGA wrapper and pin constraints remain
+board-specific; simulation success does not establish a monitor test result.

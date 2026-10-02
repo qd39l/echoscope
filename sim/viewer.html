@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EchoScope · RTL monitor</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui;background:#101519;color:#e5edf0}body{max-width:1000px;margin:40px auto;padding:0 24px}h1{font-size:32px;margin-bottom:8px}p{color:#abbec7;line-height:1.6}main{display:grid;grid-template-columns:minmax(0,640px) 1fr;gap:24px}canvas{width:100%;height:auto;image-rendering:pixelated;background:#000;border:1px solid #34454e}aside{display:flex;flex-direction:column;gap:16px}button,select{font:inherit;color:inherit;background:#23343e;border:1px solid #4b626f;border-radius:6px;padding:9px;cursor:pointer}button:hover{background:#334d5a}label{display:flex;align-items:center;gap:8px}input{accent-color:#39dadb}#status{font:14px ui-monospace,monospace;white-space:pre-wrap;line-height:1.6}#error{color:#ff9a9a}small{color:#9aafb8}footer{margin-top:24px} @media(max-width:800px){main{grid-template-columns:1fr}}
+</style>
+<h1>EchoScope <span style="color:#42d8dc">/ RTL monitor</span></h1>
+<p>The picture comes from the simulated chip’s RGB and sync pins. Cyan is world A, magenta is world B, and white is agreement.</p>
+<main><div><canvas id="screen" width="640" height="480" aria-label="VGA output from the RTL simulation"></canvas><p id="status">Starting simulator…</p><p id="error" role="alert"></p></div><aside>
+<label><input id="pause" type="checkbox" checked>Pause evolution</label>
+<label><input id="reverse" type="checkbox">Reverse time</label>
+<label><input id="difference" type="checkbox">Differences only</label>
+<button id="step">Single step</button>
+<label>Cell <select id="cell" aria-label="Cell to flip"></select></label>
+<button id="flip">Flip selected bit</button>
+<button id="clone">Clone A → B</button>
+<button id="reset">Reset worlds</button>
+<button id="save">Save frame</button>
+<small>Commands are held for two simulated frames. Changes appear after vertical blanking. Audio is muted in this viewer.</small>
+</aside></main>
+<footer><p>640 × 480 · 800 × 525 total · 25 MHz · 59.524 Hz simulated signal. Playback speed depends on the simulator. This digital receiver does not model VGA analog voltages or a monitor’s clock recovery.</p></footer>
+<script>
+const $=id=>document.getElementById(id),ctx=$('screen').getContext('2d');
+for(let i=0;i<32;i++)$('cell').add(new Option(String(i),i,i===16,i===16));
+let queue=[],reset=true,frames=0,stopped=false;
+const buttons=['step','flip','clone'];
+function pulse(bit){if(queue.length)return;queue=[bit,bit,0,0];buttons.forEach(id=>$(id).disabled=true)}
+$('step').onclick=()=>pulse(4);$('flip').onclick=()=>pulse(8);$('clone').onclick=()=>pulse(16);
+$('reset').onclick=()=>{reset=true;queue=[];buttons.forEach(id=>$(id).disabled=false);if(stopped){stopped=false;render()}};
+$('save').onclick=()=>{const link=document.createElement('a');link.download='echoscope-rtl.png';link.href=$('screen').toDataURL();link.click()};
+async function render(){
+ try{
+  const controls=64|($('pause').checked?2:0)|($('reverse').checked?1:0)|($('difference').checked?32:0)|(queue.shift()||0);
+  const requestReset=reset;reset=false;
+  const start=performance.now();
+  const response=await fetch('/frame',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({controls,address:Number($('cell').value),reset:requestReset})});
+  if(!response.ok)throw new Error(await response.text());
+  const bitmap=await createImageBitmap(await response.blob());ctx.drawImage(bitmap,0,0);bitmap.close();
+  $('error').textContent='';
+  $('status').textContent=`SYNC OK · ${response.headers.get('X-Sim-Backend')} · frame ${++frames}\n${(Number(response.headers.get('X-Sim-Cycles'))/25e6).toFixed(3)} simulated seconds · ${(1000/(performance.now()-start)).toFixed(1)} frames/s playback`;
+  if(!queue.length)buttons.forEach(id=>$(id).disabled=false);
+  setTimeout(render,10);
+ }catch(error){stopped=true;$('error').textContent=`Simulation stopped: ${error.message}. Reset to reacquire.`}
+}
+render();
+</script>
+</html>
